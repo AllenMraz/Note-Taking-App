@@ -9,19 +9,19 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TaskDao {
+interface NoteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(task: Task)
+    suspend fun insert(note: Note)
 
     @Update
-    suspend fun  update(task: Task)
+    suspend fun  update(note: Note)
 
     @Delete
-    suspend fun delete(task: Task)
+    suspend fun delete(note: Note)
 
     @Query("SELECT * from tasks WHERE id = :id")
-    fun getTask(id: Int): Flow<Task>
+    fun getNotes(id: Int): Flow<Note>
 
     @Query("Select * from tasks Order By title ASC")
-    fun getAllTasks(): Flow<List<Task>>
+    fun getAllNotes(): Flow<List<Note>>
 }

@@ -1,4 +1,4 @@
-package com.example.notetakingapp.ui.task
+package com.example.notetakingapp.ui.note
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,32 +22,31 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.notetakingapp.R
-import com.example.notetakingapp.data.Task
 import kotlinx.coroutines.launch
 
 @Composable
-fun TaskEntryScreen(
+fun NoteEntryScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
-    viewModel: TaskEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: NoteEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ){
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
-            TaskTopAppBar(
-                title = stringResource(TaskEntryDestination.titleRes),
+            NoteTopAppBar(
+                title = stringResource(NoteEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
                 onNavigateUp = onNavigateUp
             )
         }
     ) { innerPadding ->
-        TaskEntryBody(
-            taskUiState = viewModel.taskUiState,
-            onTaskValueChange = viewModel::updateUiState,
+        NoteEntryBody(
+            noteUiState = viewModel.noteUiState,
+            onNoteValueChange = viewModel::updateUiState,
             onSaveClick ={
                 coroutineScope.launch{
-                    viewModel.saveTask()
+                    viewModel.saveNote()
                     navigateBack()
                 }
             },
@@ -65,9 +64,9 @@ fun TaskEntryScreen(
 }
 
 @Composable
-fun TaskEntryBody(
-    taskUiState: TaskUiState,
-    onTaskValueChange: (TaskDetails) -> Unit,
+fun NoteEntryBody(
+    noteUiState: NoteUiState,
+    onNoteValueChange: (NoteDetails) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
@@ -75,14 +74,14 @@ fun TaskEntryBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
     ){
-        TaskInputForm(
-            taskDetails = taskUiState.taskDetails,
-            onValueChange = onTaskValueChange,
+        NoteInputForm(
+            noteDetails = noteUiState.noteDetails,
+            onValueChange = onNoteValueChange,
             modifier = Modifier.fillMaxWidth()
         )
         Button(
             onClick = onSaveClick,
-            enabled = taskUiState.isEntryValid,
+            enabled = noteUiState.isEntryValid,
             shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
         ){
@@ -92,10 +91,10 @@ fun TaskEntryBody(
 }
 
 @Composable
-fun TaskInputForm(
-    taskDetails: TaskDetails,
+fun NoteInputForm(
+    noteDetails: NoteDetails,
     modifier: Modifier = Modifier,
-    onValueChange: (TaskDetails) -> Unit= {},
+    onValueChange: (NoteDetails) -> Unit= {},
     enabled: Boolean = true
 ){
     Column(
@@ -103,9 +102,9 @@ fun TaskInputForm(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
     ){
         OutlinedTextField(
-            value = taskDetails.title,
-            onValueChange = {onValueChange(taskDetails.copy(title = it))},
-            label = {Text(stringResource(R.string.task_title_req))},
+            value = noteDetails.title,
+            onValueChange = {onValueChange(noteDetails.copy(title = it))},
+            label = {Text(stringResource(R.string.Note_title_req))},
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -116,9 +115,9 @@ fun TaskInputForm(
             singleLine = true
         )
         OutlinedTextField(
-            value = taskDetails.content,
-            onValueChange = {onValueChange(taskDetails.copy(content = it))},
-            label = {Text(stringResource(R.string.task_content_req))},
+            value = noteDetails.content,
+            onValueChange = {onValueChange(noteDetails.copy(content = it))},
+            label = {Text(stringResource(R.string.note_content_req))},
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,

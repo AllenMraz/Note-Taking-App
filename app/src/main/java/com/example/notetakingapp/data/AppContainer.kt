@@ -3,12 +3,12 @@ package com.example.notetakingapp.data
 import android.content.Context
 
 interface AppContainer {
-    val taskRepository : TaskRepository
+    val noteRepository : NoteRepository
 }
 
 class AppDataContainer(private val context: Context) : AppContainer {
 
-    override val taskRepository: TaskRepository by lazy{
-        OfflineTaskRepository(TaskListDatabase.getDatabase(context).taskDao())
+    override val noteRepository: NoteRepository by lazy{
+        OfflineNoteRepository(NoteListDatabase.getDatabase(context).noteDao())
     }
 }
