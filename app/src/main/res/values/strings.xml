@@ -11,7 +11,7 @@
     <string name="task_entry_title">Add Task</string>
     <string name="task_title_req">Task Title*</string>
     <string name="no">No</string>
-    <string name="quantity_req">Quantity in Stock*</string>
+    <string name="task_content_req">Task Content*</string>
     <string name="save_action">Save</string>
     <string name="required_fields">*required fields</string>
 
