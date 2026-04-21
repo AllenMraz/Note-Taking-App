@@ -26,7 +26,7 @@ class NoteEntryViewModel(private val noteRepository: NoteRepository): ViewModel(
 
     private  fun validateInput(uiState: NoteDetails = noteUiState.noteDetails): Boolean{
         return with(uiState) {
-            title.isNotBlank() && content.isNotBlank() && timestamp != 0
+            title.isNotBlank() && content.isNotBlank()
         }
     }
 }

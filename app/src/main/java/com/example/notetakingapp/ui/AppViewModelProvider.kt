@@ -15,7 +15,7 @@ import com.example.notetakingapp.ui.theme.NoteTakingAppTheme
 object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
-            NoteEntryViewModel(NoteTakingApplication().container.noteRepository)
+            NoteEntryViewModel(noteTakingApplication().container.noteRepository)
         }
 
         initializer {
