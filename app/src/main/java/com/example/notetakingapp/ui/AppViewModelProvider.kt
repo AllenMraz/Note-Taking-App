@@ -7,24 +7,15 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.notetakingapp.NoteTakingApplication
+import com.example.notetakingapp.home.HomeViewModel
 import com.example.notetakingapp.ui.note.NoteDetails
 import com.example.notetakingapp.ui.note.NoteEntryViewModel
 import com.example.notetakingapp.ui.theme.NoteTakingAppTheme
 
 object AppViewModelProvider {
     val Factory = viewModelFactory {
-        initializer{
-            NoteEditViewModel(
-                this.createSavedHandle()
-            )
-        }
         initializer {
             NoteEntryViewModel(NoteTakingApplication().container.noteRepository)
-        }
-        initializer {
-            NoteDetailsViewModel(
-                this.createSavedStateHandle()
-            )
         }
 
         initializer {

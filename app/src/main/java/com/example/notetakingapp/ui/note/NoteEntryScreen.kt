@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -21,9 +22,19 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.notetakingapp.NoteTopAppBar
 import com.example.notetakingapp.R
+import com.example.notetakingapp.ui.AppViewModelProvider
+import com.example.notetakingapp.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 
+
+object NoteEntryDestination : NavigationDestination {
+    override val route = "item_entry"
+    override val titleRes = R.string.note_entry_title
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteEntryScreen(
     navigateBack: () -> Unit,
@@ -37,7 +48,7 @@ fun NoteEntryScreen(
             NoteTopAppBar(
                 title = stringResource(NoteEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
-                onNavigateUp = onNavigateUp
+                navigateUp = onNavigateUp
             )
         }
     ) { innerPadding ->

@@ -8,7 +8,7 @@
     <string name="edit_task_title">Edit Task</string>
     <string name="task">Task</string>
     <string name="task_detail_title">Task Details</string>
-    <string name="task_entry_title">Add Task</string>
+    <string name="note_entry_title">Add Task</string>
     <string name="Note_title_req">Task Title*</string>
     <string name="no">No</string>
     <string name="note_content_req">Task Content*</string>
