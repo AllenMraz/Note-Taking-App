@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">NoteTakingApp</string>
+    <string name="attention">Attention</string>
+    <string name="back_button">Back</string>
+    <string name="delete">Delete</string>
+    <string name="delete_question">Are you sure you want to delete?</string>
+    <string name="no_task_description">Oops!\nNo tasks in the inventory.\nTap + to add.</string>
+    <string name="edit_task_title">Edit Task</string>
+    <string name="task">Task</string>
+    <string name="task_detail_title">Task Details</string>
+    <string name="task_entry_title">Add Task</string>
+    <string name="task_title_req">Task Title*</string>
+    <string name="no">No</string>
+    <string name="quantity_req">Quantity in Stock*</string>
+    <string name="save_action">Save</string>
+    <string name="required_fields">*required fields</string>
+
 </resources>
