@@ -22,10 +22,7 @@ fun NoteNavHost(
         navController = navController,  startDestination = HomeDestination.route, modifier = modifier
     ) {
         composable(route = HomeDestination.route){
-            HomeScreen(navigateToItemEntry = { navController.navigate(NoteEntryDestination.route)},
-                navigateToItemUpdate ={
-                    navController.navigate("${NoteEntryDestination.route}/${it}")
-                })
+            HomeScreen(navigateToItemEntry = { navController.navigate(NoteEntryDestination.route)},)
         }
         composable(route = NoteEntryDestination.route) {
             NoteEntryScreen(navigateBack = { navController.popBackStack() },

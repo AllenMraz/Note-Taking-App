@@ -19,7 +19,7 @@ object AppViewModelProvider {
         }
 
         initializer {
-            HomeViewModel()
+            HomeViewModel(noteTakingApplication().container.noteRepository)
         }
     }
 }
