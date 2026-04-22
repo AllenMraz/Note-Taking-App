@@ -1,5 +1,6 @@
 package com.example.notetakingapp.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -35,6 +36,7 @@ import com.example.notetakingapp.R
 import com.example.notetakingapp.data.Note
 import com.example.notetakingapp.ui.AppViewModelProvider
 import com.example.notetakingapp.ui.navigation.NavigationDestination
+import kotlin.collections.listOf
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 
@@ -48,6 +50,7 @@ object HomeDestination : NavigationDestination {
 @Composable
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
+    navigateToItemUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -78,6 +81,7 @@ fun HomeScreen(
     ) { innerPadding ->
         HomeBody(
             noteList = homeUiState.noteList,
+            onItemClick = navigateToItemUpdate,
             modifier = modifier.fillMaxSize(),
             contentPadding = innerPadding,
         )
@@ -87,6 +91,7 @@ fun HomeScreen(
 @Composable
 private fun HomeBody(
     noteList: List<Note>,
+    onItemClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
@@ -104,6 +109,7 @@ private fun HomeBody(
         } else {
             NoteList(
                 noteList = noteList,
+                onNoteClick = { onItemClick(it.id) },
                 contentPadding = contentPadding,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )
@@ -114,6 +120,7 @@ private fun HomeBody(
 @Composable
 private fun NoteList(
     noteList: List<Note>,
+    onNoteClick: (Note) -> Unit,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier
 ) {
@@ -124,7 +131,8 @@ private fun NoteList(
         items(items = noteList, key = { it.id }) { note ->
             InventoryNote(note = note,
                 modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_small)))
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+                    .clickable { onNoteClick(note) })
         }
     }
 }
