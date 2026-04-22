@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.notetakingapp.home.HomeDestination
 import com.example.notetakingapp.home.HomeScreen
 import com.example.notetakingapp.ui.note.NoteEntryDestination
@@ -30,6 +31,17 @@ fun NoteNavHost(
         composable(route = NoteEntryDestination.route) {
             NoteEntryScreen(navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() })
+        }
+        composable(
+            route = NoteEditDestination.routeWithArgs,
+            arguments = listOf(navArgument(NoteEditDestination.itemIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            NoteEditScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() }
+            )
         }
     }
 }
