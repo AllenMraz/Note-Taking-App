@@ -22,7 +22,7 @@ class NoteEditViewModel(
     var noteUiState by mutableStateOf(NoteUiState())
         private set
 
-    private val noteId: Int = checkNotNull(savedStateHandle[NoteEditDestination.itemIdArg])
+    private val noteId: Int = checkNotNull(savedStateHandle[NoteEditDestination.noteIdArg])
 
     init {
         viewModelScope.launch {

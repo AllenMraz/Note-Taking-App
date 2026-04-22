@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.notetakingapp.home.HomeDestination
 import com.example.notetakingapp.home.HomeScreen
+import com.example.notetakingapp.ui.note.NoteEditDestination
+import com.example.notetakingapp.ui.note.NoteEditScreen
 import com.example.notetakingapp.ui.note.NoteEntryDestination
 import com.example.notetakingapp.ui.note.NoteEntryScreen
 
@@ -25,7 +27,7 @@ fun NoteNavHost(
         composable(route = HomeDestination.route){
             HomeScreen(navigateToItemEntry = { navController.navigate(NoteEntryDestination.route)},
                 navigateToItemUpdate ={
-                    navController.navigate("${NoteEntryDestination.route}/${it}")
+                    navController.navigate("${NoteEditDestination.route}/${it}")
                 })
         }
         composable(route = NoteEntryDestination.route) {
@@ -34,7 +36,7 @@ fun NoteNavHost(
         }
         composable(
             route = NoteEditDestination.routeWithArgs,
-            arguments = listOf(navArgument(NoteEditDestination.itemIdArg) {
+            arguments = listOf(navArgument(NoteEditDestination.noteIdArg) {
                 type = NavType.IntType
             })
         ) {
