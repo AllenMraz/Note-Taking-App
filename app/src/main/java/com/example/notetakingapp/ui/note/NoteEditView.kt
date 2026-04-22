@@ -56,4 +56,13 @@ class NoteEditViewModel(
             title.isNotBlank() && content.isNotBlank()
         }
     }
+
+    suspend fun deleteNote() {
+        notesRepository.deleteNote(noteUiState.noteDetails.toNote())
+    }
+
 }
+
+data class NoteEditUiState(
+    val noteDetails: NoteDetails = NoteDetails()
+)

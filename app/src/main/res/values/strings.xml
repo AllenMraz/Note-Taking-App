@@ -11,6 +11,7 @@
     <string name="note_entry_title">Add Task</string>
     <string name="Note_title_req">Task Title*</string>
     <string name="no">No</string>
+    <string name="yes">Yes</string>
     <string name="note_content_req">Task Content*</string>
     <string name="save_action">Save</string>
     <string name="required_fields">*required fields</string>
