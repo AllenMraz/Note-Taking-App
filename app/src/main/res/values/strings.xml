@@ -15,5 +15,7 @@
     <string name="note_content_req">Task Content*</string>
     <string name="save_action">Save</string>
     <string name="required_fields">*required fields</string>
+    <string name="dark_mode_toggle">Dark Mode</string>
+    <string name="light_mode_toggle">Light Mode</string>
 
 </resources>

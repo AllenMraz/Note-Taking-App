@@ -1,5 +1,6 @@
 package com.example.notetakingapp.ui.theme
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -10,6 +11,10 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.notetakingapp.AppUiState
+import com.example.notetakingapp.NoteTakingAppViewModel
+import com.example.notetakingapp.ui.AppViewModelProvider
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -33,11 +38,13 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+
+
 @Composable
 fun NoteTakingAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean,
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

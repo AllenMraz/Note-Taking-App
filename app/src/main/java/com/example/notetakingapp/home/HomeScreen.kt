@@ -39,6 +39,7 @@ import com.example.notetakingapp.ui.navigation.NavigationDestination
 import kotlin.collections.listOf
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.example.notetakingapp.AppUiState
 
 object HomeDestination : NavigationDestination {
     override val route = "home"
@@ -52,18 +53,22 @@ fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     navigateToItemUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    uiState: AppUiState,
+    viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    selectTheme: (Boolean) -> Unit
 ) {
+
     val homeUiState by viewModel.homeUiState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             NoteTopAppBar(
                 title = stringResource(HomeDestination.titleRes),
                 canNavigateBack = false,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                uiState = uiState,
+                selectTheme = selectTheme
             )
         },
         floatingActionButton = {

@@ -30,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.room.Delete
+import com.example.notetakingapp.AppUiState
 import com.example.notetakingapp.NoteTopAppBar
 import com.example.notetakingapp.R
 import com.example.notetakingapp.ui.navigation.NavigationDestination
@@ -50,7 +51,9 @@ fun NoteEditScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: NoteEditViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: NoteEditViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    uiState: AppUiState,
+    selectTheme: (Boolean) -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
@@ -58,7 +61,9 @@ fun NoteEditScreen(
             NoteTopAppBar(
                 title = stringResource(NoteEditDestination.titleRes),
                 canNavigateBack = true,
-                navigateUp = onNavigateUp
+                navigateUp = onNavigateUp,
+                uiState = uiState,
+                selectTheme = selectTheme
             )
         },
         modifier = modifier
@@ -158,12 +163,4 @@ private fun DeleteConfirmationDialog(
                 Text(text = stringResource(R.string.yes))
             }
         })
-}
-
-@Preview(showBackground = true)
-@Composable
-fun NoteEditScreenPreview() {
-    NoteTakingAppTheme() {
-        NoteEditScreen(navigateBack = { /*Do nothing*/ }, onNavigateUp = { /*Do nothing*/ })
-    }
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +23,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.notetakingapp.AppUiState
 import com.example.notetakingapp.NoteTopAppBar
 import com.example.notetakingapp.R
 import com.example.notetakingapp.ui.AppViewModelProvider
@@ -40,7 +42,9 @@ fun NoteEntryScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     canNavigateBack: Boolean = true,
-    viewModel: NoteEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: NoteEntryViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    uiState: AppUiState,
+    selectTheme: (Boolean) -> Unit
 ){
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
@@ -48,7 +52,9 @@ fun NoteEntryScreen(
             NoteTopAppBar(
                 title = stringResource(NoteEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
-                navigateUp = onNavigateUp
+                navigateUp = onNavigateUp,
+                uiState = uiState,
+                selectTheme = selectTheme
             )
         }
     ) { innerPadding ->
