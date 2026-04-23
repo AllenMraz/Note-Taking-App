@@ -28,7 +28,9 @@ import com.example.notetakingapp.NoteTopAppBar
 import com.example.notetakingapp.R
 import com.example.notetakingapp.ui.AppViewModelProvider
 import com.example.notetakingapp.ui.navigation.NavigationDestination
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 object NoteEntryDestination : NavigationDestination {
@@ -64,7 +66,9 @@ fun NoteEntryScreen(
             onSaveClick ={
                 coroutineScope.launch{
                     viewModel.saveNote()
-                    navigateBack()
+                    withContext(Dispatchers.Main) {
+                        navigateBack()
+                    }
                 }
             },
             modifier = Modifier

@@ -3,14 +3,14 @@ package com.example.notetakingapp
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.notetakingapp.data.Note
 import com.example.notetakingapp.data.NoteDao
 import com.example.notetakingapp.data.NoteListDatabase
 import kotlinx.coroutines.flow.first
-import org.junit.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test

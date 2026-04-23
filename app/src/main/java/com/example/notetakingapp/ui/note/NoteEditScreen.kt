@@ -37,6 +37,8 @@ import com.example.notetakingapp.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 import com.example.notetakingapp.ui.AppViewModelProvider
 import com.example.notetakingapp.ui.theme.NoteTakingAppTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 object NoteEditDestination : NavigationDestination {
     override val route = "item_edit"
@@ -78,14 +80,18 @@ fun NoteEditScreen(
                 // be cancelled - since the scope is bound to composition.
                 coroutineScope.launch {
                     viewModel.updateNote()
-                    navigateBack()
+                    withContext(Dispatchers.Main) {
+                        navigateBack()
+                    }
                 }
 
             },
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteNote()
-                    navigateBack()
+                    withContext(Dispatchers.Main) {
+                        navigateBack()
+                    }
                 }
             },
             modifier = Modifier
