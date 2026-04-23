@@ -4,13 +4,21 @@ package com.example.notetakingapp
 
 
 
+import android.R.attr.checked
+import android.media.Image
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.sharp.Check
+import androidx.compose.material.icons.sharp.Close
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -63,8 +71,23 @@ fun NoteTopAppBar(
             }
         },
         actions = {
-            Switch(uiState.isDarkMode,
-                    onCheckedChange = selectTheme)
+            Switch(checked = uiState.isDarkMode,
+                    onCheckedChange = selectTheme,
+                thumbContent = if(uiState.isDarkMode){
+                    {
+                        Icon(
+                            imageVector = Icons.Sharp.Check,
+                            contentDescription = "DarkMode",
+                            modifier = Modifier.size(SwitchDefaults.IconSize)
+                        )
+                    }
+                }else{
+                    {
+                    Icon(imageVector = Icons.Sharp.Close,
+                        contentDescription = "LightMode",
+                        modifier = Modifier.size(SwitchDefaults.IconSize))
+                }
+                })
         }
     )
 }

@@ -44,4 +44,16 @@ class UiTest {
 
         composeTestRule.onNodeWithText("Test Title").assertIsDisplayed()
     }
+
+    @Test
+    fun test_toggle_dark_mode(){
+        composeTestRule.setContent {
+            Surface() {
+                NoteTakingApp()
+            }
+        }
+        composeTestRule.onNodeWithContentDescription("DarkMode").performClick()
+
+        composeTestRule.onNodeWithContentDescription("LightMode").assertIsDisplayed()
+    }
 }
