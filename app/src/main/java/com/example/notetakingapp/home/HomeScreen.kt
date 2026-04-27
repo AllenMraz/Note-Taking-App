@@ -46,7 +46,7 @@ object HomeDestination : NavigationDestination {
     override val titleRes = R.string.app_name
 }
 
-
+// the function tha creates the home screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -63,7 +63,7 @@ fun HomeScreen(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            NoteTopAppBar(
+            NoteTopAppBar( // tha apps top bar
                 title = stringResource(HomeDestination.titleRes),
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior,
@@ -72,7 +72,7 @@ fun HomeScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
+            FloatingActionButton( // button to create a new Note
                 onClick = navigateToItemEntry,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
@@ -84,7 +84,7 @@ fun HomeScreen(
             }
         },
     ) { innerPadding ->
-        HomeBody(
+        HomeBody( // function tha creates the main body of the home screen
             noteList = homeUiState.noteList,
             onItemClick = navigateToItemUpdate,
             modifier = modifier.fillMaxSize(),
@@ -92,7 +92,7 @@ fun HomeScreen(
         )
     }
 }
-
+// create the main body by making a list of every note in the data base
 @Composable
 private fun HomeBody(
     noteList: List<Note>,
@@ -121,7 +121,7 @@ private fun HomeBody(
         }
     }
 }
-
+// creates a list of notes
 @Composable
 private fun NoteList(
     noteList: List<Note>,
@@ -141,7 +141,7 @@ private fun NoteList(
         }
     }
 }
-
+//an individual note item
 @Composable
 private fun InventoryNote(
     note: Note, modifier: Modifier = Modifier

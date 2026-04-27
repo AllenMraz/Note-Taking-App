@@ -1,7 +1,7 @@
 package com.example.notetakingapp.data
 
 import kotlinx.coroutines.flow.Flow
-
+// offline repository that impliments note repository
 class OfflineNoteRepository (private val noteDao: NoteDao): NoteRepository{
     override fun getAllNoteStream(): Flow<List<Note>> = noteDao.getAllNotes()
 

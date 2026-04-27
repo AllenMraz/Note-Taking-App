@@ -17,6 +17,7 @@ import com.example.notetakingapp.ui.note.NoteEntryViewModel
 import com.example.notetakingapp.ui.theme.NoteTakingAppTheme
 
 object AppViewModelProvider {
+    // a function that initializes each view model
     val Factory = viewModelFactory {
         initializer {
             NoteEntryViewModel(noteTakingApplication().container.noteRepository)

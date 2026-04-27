@@ -14,7 +14,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-
+// view model that store information on the userPreferenceRepository to allow for a switch that can
+// tagel between dark and light mode
 class NoteTakingAppViewModel(val userPreferenceRepository: UserPreferenceRepository) : ViewModel() {
     val appUiState: StateFlow<AppUiState> = userPreferenceRepository.isDarkMode.map { isDarkMode ->
         AppUiState(isDarkMode)
@@ -25,14 +26,14 @@ class NoteTakingAppViewModel(val userPreferenceRepository: UserPreferenceReposit
                 isDarkMode = userPreferenceRepository.isDarkMode.first()
             )
         })
-    fun selectTheme(isDarkMode: Boolean){
+    fun selectTheme(isDarkMode: Boolean){ // function that selects between dark and light mode
         viewModelScope.launch {
             userPreferenceRepository.saveDisplayPreference(isDarkMode)
         }
     }
 
     companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
+        val Factory: ViewModelProvider.Factory = viewModelFactory { // viewmodel initializer for NoteTakingAppViewModel
             initializer {
                 val application = (this[APPLICATION_KEY] as NoteTakingApplication)
                 NoteTakingAppViewModel(application.userPreferenceRepository)

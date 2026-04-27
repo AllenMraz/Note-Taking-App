@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +36,7 @@ object NoteEntryDestination : NavigationDestination {
     override val route = "item_entry"
     override val titleRes = R.string.note_entry_title
 }
-
+//Main Function for NoteEntryScreen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteEntryScreen(
@@ -51,7 +50,7 @@ fun NoteEntryScreen(
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
         topBar = {
-            NoteTopAppBar(
+            NoteTopAppBar( //Calls the apps topbar
                 title = stringResource(NoteEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
                 navigateUp = onNavigateUp,
@@ -60,7 +59,7 @@ fun NoteEntryScreen(
             )
         }
     ) { innerPadding ->
-        NoteEntryBody(
+        NoteEntryBody( //Calls the Main Logic of NoteEntryScreen
             noteUiState = viewModel.noteUiState,
             onNoteValueChange = viewModel::updateUiState,
             onSaveClick ={
@@ -83,7 +82,7 @@ fun NoteEntryScreen(
 
     }
 }
-
+// Function creates a new note entity and calls Note InputForm to let the user enter the title and content
 @Composable
 fun NoteEntryBody(
     noteUiState: NoteUiState,
@@ -95,12 +94,12 @@ fun NoteEntryBody(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
     ){
-        NoteInputForm(
+        NoteInputForm( // Calls InputForm for input for title and content
             noteDetails = noteUiState.noteDetails,
             onValueChange = onNoteValueChange,
             modifier = Modifier.fillMaxWidth()
         )
-        Button(
+        Button( // Button that saves the infermation put into InputForm
             onClick = onSaveClick,
             enabled = noteUiState.isEntryValid,
             shape = MaterialTheme.shapes.small,
@@ -110,7 +109,7 @@ fun NoteEntryBody(
         }
     }
 }
-
+// Form Lay out that contains two outlinedTextFields to input title and content
 @Composable
 fun NoteInputForm(
     noteDetails: NoteDetails,
@@ -122,7 +121,7 @@ fun NoteInputForm(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
     ){
-        OutlinedTextField(
+        OutlinedTextField( // input field for title
             value = noteDetails.title,
             onValueChange = {onValueChange(noteDetails.copy(title = it))},
             label = {Text(stringResource(R.string.Note_title_req))},
@@ -135,7 +134,7 @@ fun NoteInputForm(
             enabled = enabled,
             singleLine = true
         )
-        OutlinedTextField(
+        OutlinedTextField( // input field for content
             value = noteDetails.content,
             onValueChange = {onValueChange(noteDetails.copy(content = it))},
             label = {Text(stringResource(R.string.note_content_req))},

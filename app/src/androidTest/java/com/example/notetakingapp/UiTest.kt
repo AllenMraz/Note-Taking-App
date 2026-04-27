@@ -7,18 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
-import androidx.lifecycle.Lifecycle
-import androidx.test.annotation.UiThreadTest
-import androidx.test.runner.AndroidJUnit4
-import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 
 class UiTest {
@@ -58,18 +52,18 @@ class UiTest {
 
         composeTestRule.onNodeWithContentDescription("Add Note").performClick()
 
-        composeTestRule.onNodeWithText("Note Title*").performTextInput("Test Title")
+        composeTestRule.onNodeWithText("Note Title*").performTextInput("Test Edit Title")
         composeTestRule.onNodeWithText("Note Content*").performTextInput("Test Content")
 
 
         composeTestRule.onNodeWithText("Save").performClick()
 
-        composeTestRule.onNodeWithText("Test Title").performClick()
-        composeTestRule.onNodeWithText("Test Title").performTextReplacement("Delete Note")
+        composeTestRule.onNodeWithText("Test Edit Title").performClick()
+        composeTestRule.onNodeWithText("Test Edit Title").performTextReplacement("Edit Note")
 
         composeTestRule.onNodeWithText("Save").performClick()
 
-        composeTestRule.onNodeWithText("Delete Note").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Edit Note").assertIsDisplayed()
     }
 
     @Test
@@ -82,18 +76,11 @@ class UiTest {
         }
         composeTestRule.onNodeWithContentDescription("Add Note").performClick()
 
-        composeTestRule.onNodeWithText("Note Title*").performTextInput("Test Title")
+        composeTestRule.onNodeWithText("Note Title*").performTextInput("Delete Note")
         composeTestRule.onNodeWithText("Note Content*").performTextInput("Test Content")
 
 
         composeTestRule.onNodeWithText("Save").performClick()
-
-        composeTestRule.onNodeWithText("Test Title").performClick()
-        composeTestRule.onNodeWithText("Test Title").performTextReplacement("Delete Note")
-
-        composeTestRule.onNodeWithText("Save").performClick()
-
-        composeTestRule.onNodeWithText("Delete Note").assertIsDisplayed()
 
         composeTestRule.onNodeWithText("Delete Note").performClick()
 

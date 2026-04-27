@@ -8,22 +8,23 @@ import androidx.lifecycle.ViewModel
 import com.example.notetakingapp.data.Note
 import com.example.notetakingapp.data.NoteRepository
 
-
+// a viewModel class for NoteEntry
 class NoteEntryViewModel(private val noteRepository: NoteRepository): ViewModel(){
-
+    //creates a noteUiState object
     var noteUiState by mutableStateOf(NoteUiState())
         private set
-
+    // function that updates the data base through noteUiState
     fun updateUiState(noteDetails: NoteDetails) {
         noteUiState =
             NoteUiState(noteDetails = noteDetails, isEntryValid = validateInput(noteDetails))
     }
+    // using noteUiState to save the changes
     suspend fun saveNote() {
         if (validateInput()){
             noteRepository.insertNote((noteUiState.noteDetails.toNote()))
         }
     }
-
+    // uses noteUiState to delete an iteam
     private  fun validateInput(uiState: NoteDetails = noteUiState.noteDetails): Boolean{
         return with(uiState) {
             title.isNotBlank() && content.isNotBlank()
@@ -31,30 +32,31 @@ class NoteEntryViewModel(private val noteRepository: NoteRepository): ViewModel(
     }
 }
 
-
+// the data class checks to see if the entered data is valid
 data class NoteUiState(
     val noteDetails: NoteDetails = NoteDetails(),
     val isEntryValid: Boolean = false
 )
+// data class that hold all of the data for the iteam
 data class NoteDetails(
     val id: Int = 0,
     val title: String = "",
     val content: String = "",
     val  timestamp: Int = 0
 )
-
+// insurts the data into noteDetails
 fun NoteDetails.toNote(): Note = Note(
     id = id,
     title = title,
     content = content,
     timestamp = timestamp
 )
-
+// converts a note object to noteuistate
 fun Note.toNoteUiState(isEntryValid: Boolean = false): NoteUiState = NoteUiState(
     noteDetails =  this.toNoteDetails(),
     isEntryValid = isEntryValid
 )
-
+// converts a note object to noteUiState
 fun Note.toNoteDetails(): NoteDetails = NoteDetails(
     id = id,
     title = title,

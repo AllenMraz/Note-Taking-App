@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.runBlocking
-
+// class that create access to the data base
 class HomeViewModel(
     noteRepository: NoteRepository,
 ) : ViewModel() {

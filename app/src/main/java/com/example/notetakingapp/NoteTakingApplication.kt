@@ -13,6 +13,7 @@ private const val DISPLAY_PREFERENCE_NAME = "display_preferences"
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = DISPLAY_PREFERENCE_NAME
 )
+//class that sorres information for the data base and user preferences
 class NoteTakingApplication: Application() {
     lateinit var  container: AppContainer
     lateinit var userPreferenceRepository: UserPreferenceRepository

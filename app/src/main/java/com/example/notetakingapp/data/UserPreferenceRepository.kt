@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
-
+// a repository that uses dataStore to store the preferences of the user
 class UserPreferenceRepository(
     private val dataStore: DataStore<Preferences>,
     val isDarkMode: Flow<Boolean> = dataStore.data.catch {

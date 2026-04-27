@@ -2,7 +2,7 @@ package com.example.notetakingapp.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+// data lay out for Note
 @Entity(tableName = "tasks")
 data class Note(
     @PrimaryKey(autoGenerate = true)

@@ -34,7 +34,7 @@ class NoteEditViewModel(
     }
 
     /**
-     * Update the item in the [ItemsRepository]'s data source
+     * Update the note in the [NoteRepository]'s data source
      */
     suspend fun updateNote() {
         if (validateInput(noteUiState.noteDetails)) {

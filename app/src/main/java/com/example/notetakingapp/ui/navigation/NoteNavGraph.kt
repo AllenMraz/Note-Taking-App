@@ -18,7 +18,7 @@ import com.example.notetakingapp.ui.note.NoteEntryDestination
 import com.example.notetakingapp.ui.note.NoteEntryScreen
 import com.example.notetakingapp.ui.theme.NoteTakingAppTheme
 
-
+// a function that helps navagate between the different screens
 @Composable
 fun NoteNavHost(
     navController: NavHostController,

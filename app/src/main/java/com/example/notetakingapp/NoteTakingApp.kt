@@ -4,11 +4,8 @@ package com.example.notetakingapp
 
 
 
-import android.R.attr.checked
-import android.media.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.sharp.Check
 import androidx.compose.material.icons.sharp.Close
@@ -16,22 +13,19 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.notetakingapp.ui.navigation.NoteNavHost
-
+//Creates the main body of the app
 @Composable
 fun NoteTakingApp(navController: NavHostController = rememberNavController(),
                   appViewModel: NoteTakingAppViewModel = viewModel(
@@ -45,7 +39,7 @@ fun NoteTakingApp(navController: NavHostController = rememberNavController(),
         )
 
 }
-
+// creates as the apps top bar that is displayed on the top of every screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteTopAppBar(
@@ -70,7 +64,7 @@ fun NoteTopAppBar(
                 }
             }
         },
-        actions = {
+        actions = { // switch that switches between dark and light mode
             Switch(checked = uiState.isDarkMode,
                     onCheckedChange = selectTheme,
                 thumbContent = if(uiState.isDarkMode){

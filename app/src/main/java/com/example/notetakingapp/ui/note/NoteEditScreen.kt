@@ -27,16 +27,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.room.Delete
 import com.example.notetakingapp.AppUiState
 import com.example.notetakingapp.NoteTopAppBar
 import com.example.notetakingapp.R
 import com.example.notetakingapp.ui.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 import com.example.notetakingapp.ui.AppViewModelProvider
-import com.example.notetakingapp.ui.theme.NoteTakingAppTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -46,7 +43,7 @@ object NoteEditDestination : NavigationDestination {
     const val noteIdArg = "itemId"
     val routeWithArgs = "$route/{$noteIdArg}"
 }
-
+//The function that displayes the edite screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteEditScreen(
@@ -74,10 +71,6 @@ fun NoteEditScreen(
             noteUiState = viewModel.noteUiState,
             onNoteValueChange = viewModel::updateUiState,
             onSaveClick = {
-                // Note: If the user rotates the screen very fast, the operation may get cancelled
-                // and the item may not be updated in the Database. This is because when config
-                // change occurs, the Activity will be recreated and the rememberCoroutineScope will
-                // be cancelled - since the scope is bound to composition.
                 coroutineScope.launch {
                     viewModel.updateNote()
                     withContext(Dispatchers.Main) {
@@ -104,7 +97,7 @@ fun NoteEditScreen(
         )
     }
 }
-
+//The Main body of the edit screen which calls both NoteInputFrom from NoteEntryScreen and DeleteConfirmationDialog
 @Composable
 private fun NoteEditBody(
     noteUiState: NoteUiState,
@@ -123,7 +116,7 @@ private fun NoteEditBody(
             onValueChange = onNoteValueChange,
             modifier = Modifier.fillMaxWidth()
         )
-        Button(
+        Button( // button that saves the changes
             onClick = onSaveClick,
             enabled = noteUiState.isEntryValid,
             shape = MaterialTheme.shapes.small,
@@ -131,7 +124,7 @@ private fun NoteEditBody(
         ) {
             Text(stringResource(R.string.save_action))
         }
-        OutlinedButton(
+        OutlinedButton( // button that will call the DeleteConfirmationDialog so user can delete entity
             onClick = { deleteConfirmationRequired = true },
             shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
@@ -150,7 +143,7 @@ private fun NoteEditBody(
         }
     }
 }
-
+//A dialog message to conferm if user wants to delete this entity
 @Composable
 private fun DeleteConfirmationDialog(
     onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit, modifier: Modifier = Modifier
